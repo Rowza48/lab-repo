@@ -1,0 +1,21 @@
+def caesar_encrypt(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            shift_base = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - shift_base + shift) % 26 + shift_base)
+        else:
+            result += char
+    return result
+
+def caesar_decrypt(cipher, shift):
+    return caesar_encrypt(cipher, -shift)
+
+text = input("Enter plaintext for Caesar Cipher: ")
+shift = int(input("Enter shift: "))
+
+encrypted = caesar_encrypt(text, shift)
+decrypted = caesar_decrypt(encrypted, shift)
+
+with open("caesar_cipher.txt", "w") as f:
+    f.write(f"Encrypted: {encrypted}\nDecrypted: {decrypted}\n")
